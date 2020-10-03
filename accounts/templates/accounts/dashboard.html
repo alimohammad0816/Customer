@@ -15,11 +15,13 @@
                 <a class="btn btn-primary btn-sm btn-block" href="">Create Customer</a>
                 <table class="table table-sm">
                     <tr>
+                        <td></td>
                         <th>Customer</th>
                         <th>Orders</th>
                     </tr>
                     {% for customer in customers %}
                     <tr>
+                        <td><a href="{% url 'accounts:customer' customer.id %}">View</a></td>
                         <td>{{customer.name}}</th>
                         <td>Order</th>
                     </tr>

@@ -20,8 +20,8 @@
             <div class="card card-body">
                 <h5>Contact Information</h5>
                 <hr>
-                <p>Email :</p>
-                <p>Phone :</p>
+                <p>Email : {{customer.email}}</p>
+                <p>Phone : {{customer.phone}}</p>
             </div>
         </div>
 
@@ -29,8 +29,7 @@
             <div class="card card-body">
                 <h5>Total Orders</h5>
                 <hr>
-                <p>Email :</p>
-                <h1 style="text-align: center;padding: 10px;"></h1>
+                <h1 style="text-align: center;padding: 5px;">{{total_orders}}</p>
             </div>
         </div>
 
@@ -64,6 +63,16 @@
                         <th>Remove</th>
 
                     </tr>
+                    {% for order in orders %}
+                        <tr>
+                            <td> {{order.product.name}} </td>
+                            <td> {{order.product.category}} </td>
+                            <td> {{order.date_created}} </td>
+                            <td> {{order.status}} </td>
+                            <td> <a href="" class="btn btn-warning">Update</a> </td>
+                            <td> <a href="" class="btn btn-danger">Delete</a> </td>
+                        </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>

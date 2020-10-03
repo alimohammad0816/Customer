@@ -6,6 +6,6 @@ app_name = 'accounts'
 
 urlpatterns = [
     path('dashboard/',dashboard,name='dashboard'),
-    path('customer/',customer,name='customer'),
+    path('customer/<int:pk>/',customer,name='customer'),
     path('products/',products,name='products'),
 ]
