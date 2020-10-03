@@ -1,0 +1,22 @@
+{% extends 'accounts/main.html' %}
+
+{% block title %}
+    Order Form
+{% endblock %}
+ 
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md text-center">
+                <form action="{% url 'accounts:order_delete' order.id %}" method="POST">
+                    {% csrf_token %}
+                    <p>Are you sure wanna <span class="text-danger">DELETE</span> <span class="text-warning">{{order.product.name}}</span> ?</p>
+                    
+                    <a href="{% url 'accounts:dashboard' %}" class="btn btn-info">Cancel</a>
+                    <input class="btn btn-danger" type="submit" name="submit" value="DELETE">
+            
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

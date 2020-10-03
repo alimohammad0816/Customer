@@ -1,0 +1,22 @@
+{% extends 'accounts/main.html' %}
+
+{% block title %}
+    Order Form
+{% endblock %}
+ 
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md text-center">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <input class="btn btn-success" type="submit" name="submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
