@@ -10,7 +10,11 @@
         <div class="col-md text-center">
             <form action="" method="POST">
                 {% csrf_token %}
-                {{form}}
+                {{formset.management_form}}
+                {% for form in formset %}
+                    {{form}}
+                    <hr/>
+                {% endfor %}
                 <input class="btn btn-success" type="submit" name="submit">
             </form>
         </div>
