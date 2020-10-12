@@ -40,4 +40,5 @@ class Order(models.Model):
     product = models.ForeignKey(Product,null=True,on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20,null=True,choices=STATUS_CHOICES)
+    note = models.CharField(max_length=200,null=True)
     tags = models.ManyToManyField(tag)
