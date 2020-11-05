@@ -4,7 +4,7 @@ from django.forms import inlineformset_factory
 from .filters import OrderFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
-from .forms import OrderForm,CreateUserForm
+from .forms import OrderForm,CreateUserForm,CustomerForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user,allowed_users,admin_only
@@ -20,6 +20,7 @@ def register(request):
 
             add_group = Group.objects.get(name='customer')
             user.groups.add(add_group)
+            Customer.objects.add(user=user)
 
             username = form.cleaned_data.get('username')
             messages.success(request,f'Account was created for {username}')
@@ -65,10 +66,38 @@ def dashboard(request):
     return render(request,'accounts/dashboard.html',context)
 
 @login_required(login_url='accounts:login')
+@allowed_users(allowed_roles=['customer'])
 def profile(request):
-    context={}
+    orders = request.user.customer.order_set.all()
+
+    total_orders = orders.count()
+    total_delivered = orders.filter(status='Delivered').count()
+    total_pending = orders.filter(status='Pending').count()
+
+    context={
+        'orders':orders,
+        'total_orders':total_orders,
+        'total_delivered':total_delivered,
+        'total_pending':total_pending,
+        }
     return render(request,'accounts/user.html',context)
-    
+
+@login_required(login_url='accounts:login')
+@allowed_users(allowed_roles=['customer'])
+def accountsettings(request):
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
+    if request.method =='POST':
+        form = CustomerForm(request.POST,request.FILES,instance=customer)
+        if form.is_valid():
+            form.save()
+
+    context={
+        'form':form,
+    }
+    return render(request,'accounts/account_settings.html',context)
+
+
 @login_required(login_url='accounts:login')
 @allowed_users(allowed_roles=['admin'])
 def products(request):

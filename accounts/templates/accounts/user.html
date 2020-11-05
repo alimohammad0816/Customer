@@ -2,6 +2,30 @@
 {% block content %}
 {% include 'accounts/status.html' %}
 
-<h3>User Profile</h3>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    <th>Note</th>
+
+                </tr>
+                {% for order in orders %}
+                    <tr>
+                        <td> {{order.product.name}} </td>
+                        <td> {{order.product.category}} </td>
+                        <td> {{order.date_created}} </td>
+                        <td> {{order.status}} </td>
+                        <td> {{order.note}} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
