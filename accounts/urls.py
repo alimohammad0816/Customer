@@ -1,6 +1,7 @@
-from django.urls import path
-
+from django.urls import path,reverse_lazy,include
 from .views import dashboard,customer,products,order_create,order_update,order_delete,register,loign,UserLogout,profile,accountsettings
+
+import django.contrib.auth.urls
 
 app_name = 'accounts'
 

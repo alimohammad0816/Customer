@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
@@ -9,7 +10,7 @@ class Customer(models.Model):
     profile_pic = models.ImageField(default='profile1.jpg',null=True,blank=True)
     def __str__(self):
         return self.name
-    
+
 class Product(models.Model):
     CATEGORY_CHOICES = (
         ('Indoor','Indoor'),

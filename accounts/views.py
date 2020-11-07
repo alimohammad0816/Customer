@@ -17,10 +17,7 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-
-            add_group = Group.objects.get(name='customer')
-            user.groups.add(add_group)
-            Customer.objects.add(user=user)
+            username = form.cleaned_data.get('username')
 
             username = form.cleaned_data.get('username')
             messages.success(request,f'Account was created for {username}')
